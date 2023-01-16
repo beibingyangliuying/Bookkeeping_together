@@ -1,5 +1,6 @@
-﻿namespace SqlContext;
-
-public class Class1
+﻿namespace SqlContext
 {
+    public class Class1
+    {
+    }
 }
