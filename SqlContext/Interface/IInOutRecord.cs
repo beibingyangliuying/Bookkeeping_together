@@ -2,6 +2,6 @@ namespace SqlContext.Interface;
 
 public interface IInOutRecord : IBaseRecord
 {
-    public string AccountName { get; set; }
-    public string CategoryName { get; set; }
+    public byte AccountId { get; set; }
+    public byte CategoryId { get; set; }
 }

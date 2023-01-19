@@ -7,8 +7,8 @@ public class InRecord : IInOutRecord
 {
     public ulong RowId { get; set; }
 #nullable disable
-    public string AccountName { get; set; }
-    public string CategoryName { get; set; }
+    public byte AccountId { get; set; }
+    public byte CategoryId { get; set; }
 #nullable enable
     public DateTime DateTime { get; set; }
     [Range(0, double.MaxValue)] public double Money { get; set; }
