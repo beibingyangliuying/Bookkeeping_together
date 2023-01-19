@@ -5,7 +5,7 @@
 -   `OutCategory`: Categories of outcome.
 -   `InRecord`: Record your income.
 -   `OutRecord`: Record your outcome.
--   `TransferRecord`: Transfer record, which means transferring from one account to another.
+-   `TransferContact`: When transferring from one account to another, a row in `InRecord` and a row in `OutRecord` will be tied together.
 
 ---
 
@@ -27,34 +27,31 @@ erDiagram
     }
     InRecord{
         int row_id PK
-        string account FK "Refers Account.name"
-        string category FK "Refers InCategory.name"
+        int account_id FK "Refers Account.row_id"
+        int category_id FK "Refers InCategory.row_id"
         datetime datetime
         double money
         string remark
     }
     OutRecord{
         int row_id PK 
-        string account FK "Refers Account.name"
-        string category FK "Refers OutCategory.name"
+        int account_id FK "Refers Account.row_id"
+        int category_id FK "Refers OutCategory.row_id"
         datetime datetime
         double money
         string remark
     }
-    TransferRecord{
+    TransferContact{
         int row_id PK
-        datetime datetime
-        double money
-        string out_account FK "Refers Account.name"
-        string in_account FK "Refers Account.name"
-        string remark
+        int in_row_id FK "Refers InRecord.row_id"
+        int out_row_id FK "Refers OutRecord.row_id"
     }
-    Account || --|{ InRecord : correspond
-    Account || --|{ OutRecord : correspond
-    Account || --|{ TransferRecord : correspond
-    InCategory || --|{ InRecord : correspond
-    OutCategory || --|{ OutRecord : correspond
-    
+    Account || --|{ InRecord : inflow
+    Account || --|{ OutRecord : outflow
+    InCategory || --|{ InRecord : inflow
+    OutCategory || --|{ OutRecord : outflow
+    TransferContact || --|| InRecord : contact
+    TransferContact || --|| OutRecord : contact
 ```
 
 ---
@@ -65,9 +62,6 @@ erDiagram
     -   `money`: should be greater than 0.
 -   `OutRecord`:
     -   `money`: should be greater than 0.
--   `TransferRecord`:
-    -   `money`:  should be greater than 0.
-    -   `out_account` can't equal with `in_account` (In a transfer record, inflow and outflow in the same account is meaningless).
 
 ---
 
