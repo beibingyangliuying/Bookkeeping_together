@@ -5,7 +5,7 @@ namespace SqlContext.ModelClass;
 
 public class OutRecord : IInOutRecord
 {
-    public ulong RowId { get; set; }
+    public int RowId { get; set; }
 #nullable disable
     public byte AccountId { get; set; }
     public byte CategoryId { get; set; }
@@ -16,5 +16,6 @@ public class OutRecord : IInOutRecord
 #nullable disable
     public Account Account { get; set; }
     public OutCategory OutCategory { get; set; }
+    public TransferContact TransferContact { get; set; }
 #nullable enable
 }

@@ -10,23 +10,23 @@ internal class AccountEntityTypeConfiguration : IEntityTypeConfiguration<Account
     {
         #region Table
 
-        builder.ToTable("Account");
+        builder.ToTable(nameof(Account));
 
         #endregion
 
         #region Column
 
-        builder.Property(account => account.RowId).HasColumnOrder(0).HasColumnName("row_id")
-            .HasColumnType("TINYINT").IsRequired().ValueGeneratedOnAddOrUpdate();
-        builder.Property(account => account.Name).HasColumnOrder(1).HasColumnName("name")
+        builder.Property(account => account.RowId).HasColumnOrder(0).HasColumnName(nameof(Account.RowId))
+            .HasColumnType("TINYINT").IsRequired().ValueGeneratedOnAdd();
+        builder.Property(account => account.Name).HasColumnOrder(1).HasColumnName(nameof(Account.Name))
             .HasColumnType("NVARCHAR(20)").IsRequired();
 
         #endregion
 
         #region Key
 
-        builder.HasKey(account => account.RowId).HasName("PK_byte_RowId");
-        builder.HasAlternateKey(account => account.Name).HasName("AK_string_Name");
+        builder.HasKey(account => account.RowId);
+        builder.HasAlternateKey(account => account.Name);
 
         #endregion
 

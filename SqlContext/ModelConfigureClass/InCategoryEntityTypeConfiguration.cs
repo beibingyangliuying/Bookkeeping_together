@@ -10,23 +10,23 @@ internal class InCategoryEntityTypeConfiguration : IEntityTypeConfiguration<InCa
     {
         #region Table
 
-        builder.ToTable("InCategory");
+        builder.ToTable(nameof(InCategory));
 
         #endregion
 
         #region Column
 
-        builder.Property(category => category.RowId).HasColumnOrder(0).HasColumnName("row_id")
-            .HasColumnType("TINYINT").IsRequired().ValueGeneratedOnAddOrUpdate();
-        builder.Property(category => category.Name).HasColumnOrder(1).HasColumnName("name")
+        builder.Property(category => category.RowId).HasColumnOrder(0).HasColumnName(nameof(InCategory.RowId))
+            .HasColumnType("TINYINT").IsRequired().ValueGeneratedOnAdd();
+        builder.Property(category => category.Name).HasColumnOrder(1).HasColumnName(nameof(InCategory.Name))
             .HasColumnType("NVARCHAR(20)").IsRequired();
 
         #endregion
 
         #region Key
 
-        builder.HasKey(category => category.RowId).HasName("PK_byte_RowId");
-        builder.HasAlternateKey(category => category.Name).HasName("AK_string_Name");
+        builder.HasKey(category => category.RowId);
+        builder.HasAlternateKey(category => category.Name);
 
         #endregion
 
