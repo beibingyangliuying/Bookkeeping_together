@@ -10,4 +10,5 @@ public class Account : INamedSeries
     public List<InRecord> InRecords { get; set; }
     public List<OutRecord> OutRecords { get; set; }
 #nullable enable
+    public override string ToString() => Name;
 }

@@ -1,28 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.EntityFrameworkCore;
+using SqlContext.ContextClass;
+using SqlContext.ModelClass;
 
-namespace MainUserInterface
+namespace MainUserInterface;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow() => InitializeComponent();
+
+    private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
     {
-        public MainWindow()
+        #region InitializeDatabase
+
+        await using var context = new BookkeepingContext();
+        await context.Database.EnsureCreatedAsync();
+
+        #endregion
+
+        #region InitializeUiElement
+
+        LabelDate.Content = "Current Date: " + DateTime.Now.ToString("yyyy-MM-dd");
+
+        #endregion
+    }
+
+    private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
+    {
+        var checkBox = sender as CheckBox;
+
+        switch (checkBox?.Name)
         {
-            InitializeComponent();
+            case nameof(CheckBoxDate):
+                DatePickerBeginDate.IsEnabled = true;
+                DatePickerEndDate.IsEnabled = true;
+                break;
+            case nameof(CheckBoxInAccount):
+                ComboBoxInAccount.IsEnabled = true;
+                break;
+            case nameof(CheckBoxInCategory):
+                ComboBoxInCategory.IsEnabled = true;
+                break;
+            case nameof(CheckBoxOutAccount):
+                ComboBoxOutAccount.IsEnabled = true;
+                break;
+            case nameof(CheckBoxOutCategory):
+                ComboBoxOutCategory.IsEnabled = true;
+                break;
+        }
+    }
+
+    private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
+    {
+        var checkBox = sender as CheckBox;
+
+        switch (checkBox?.Name)
+        {
+            case nameof(CheckBoxDate):
+                DatePickerBeginDate.IsEnabled = false;
+                DatePickerEndDate.IsEnabled = false;
+                break;
+            case nameof(CheckBoxInAccount):
+                ComboBoxInAccount.IsEnabled = false;
+                break;
+            case nameof(CheckBoxInCategory):
+                ComboBoxInCategory.IsEnabled = false;
+                break;
+            case nameof(CheckBoxOutAccount):
+                ComboBoxOutAccount.IsEnabled = false;
+                break;
+            case nameof(CheckBoxOutCategory):
+                ComboBoxOutCategory.IsEnabled = false;
+                break;
         }
     }
 }
