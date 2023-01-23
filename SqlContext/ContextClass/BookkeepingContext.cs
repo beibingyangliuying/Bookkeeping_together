@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SqlContext.ModelClass;
 using SqlContext.ModelConfigureClass;
 
@@ -6,10 +7,8 @@ namespace SqlContext.ContextClass;
 
 public sealed class BookkeepingContext : DbContext
 {
-    private const string ConnectionString =
-        @"Server=(localdb)\mssqllocaldb;Database=BookkeepingBeiBingYangLiuYing;Trusted_Connection=True;";
-
-    private const string Schema = @"dbo";
+    private static readonly string ConnectionString;
+    private static readonly string Schema;
 #nullable disable
     public DbSet<Account> Accounts { get; set; }
     public DbSet<InCategory> InCategories { get; set; }
@@ -18,6 +17,16 @@ public sealed class BookkeepingContext : DbContext
     public DbSet<OutRecord> OutRecords { get; set; }
     public DbSet<TransferContact> TransferContacts { get; set; }
 #nullable enable
+
+    static BookkeepingContext()
+    {
+        var configurationBuilder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile(@"appsettings.json");
+        var config = configurationBuilder.Build();
+        ConnectionString = config["DataBase:ConnectionString"] ?? throw new InvalidDataException();
+        Schema = config["DataBase:Schema"] ?? throw new InvalidDataException();
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
@@ -35,32 +44,5 @@ public sealed class BookkeepingContext : DbContext
         modelBuilder.ApplyConfiguration(new InRecordEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new OutRecordEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new TransferContactEntityTypeConfiguration());
-    }
-
-    public static void InitializeDataBase()
-    {
-        using var context = new BookkeepingContext();
-        context.Database.EnsureCreated();
-
-        const string name = $"__{nameof(TransferContact)}__";
-        try
-        {
-            context.InCategories.Single(category => category.Name == name);
-        }
-        catch (InvalidOperationException exception)
-        {
-            context.InCategories.Add(new InCategory { Name = name });
-        }
-
-        try
-        {
-            context.OutCategories.Single(category => category.Name == name);
-        }
-        catch (InvalidOperationException exception)
-        {
-            context.OutCategories.Add(new OutCategory { Name = name });
-        }
-
-        context.SaveChanges();
     }
 }

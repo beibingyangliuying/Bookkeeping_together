@@ -9,4 +9,5 @@ public class InCategory : INamedSeries
     public string Name { get; set; }
     public List<InRecord> InRecords { get; set; }
 #nullable enable
+    public override string ToString() => Name;
 }
