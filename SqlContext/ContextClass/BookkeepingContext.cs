@@ -1,3 +1,5 @@
+// #define UnInitialized
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SqlContext.ModelClass;
@@ -9,6 +11,7 @@ public sealed class BookkeepingContext : DbContext
 {
     private static readonly string ConnectionString;
     private static readonly string Schema;
+    public const string Placeholder = $"__{nameof(TransferContact)}__";
 #nullable disable
     public DbSet<Account> Accounts { get; set; }
     public DbSet<InCategory> InCategories { get; set; }
@@ -25,6 +28,36 @@ public sealed class BookkeepingContext : DbContext
         var config = configurationBuilder.Build();
         ConnectionString = config["DataBase:ConnectionString"] ?? throw new InvalidDataException();
         Schema = config["DataBase:Schema"] ?? throw new InvalidDataException();
+    }
+
+    public static async Task InitializeDataBase()
+    {
+        await using var context = new BookkeepingContext();
+        await context.Database.EnsureCreatedAsync();
+
+#if UnInitialized
+        try
+        {
+            // Name is unique.
+            await context.InCategories.SingleAsync(category => category.Name == Placeholder);
+        }
+        catch (InvalidOperationException)
+        {
+            await context.InCategories.AddAsync(new InCategory { Name = Placeholder });
+        }
+
+        try
+        {
+            // Name is unique.
+            await context.InCategories.SingleAsync(category => category.Name == Placeholder);
+        }
+        catch (InvalidOperationException)
+        {
+            await context.InCategories.AddAsync(new InCategory { Name = Placeholder });
+        }
+
+        await context.SaveChangesAsync();
+#endif
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

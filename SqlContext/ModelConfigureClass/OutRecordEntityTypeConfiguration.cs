@@ -37,6 +37,13 @@ internal class OutRecordEntityTypeConfiguration : IEntityTypeConfiguration<OutRe
 
         #endregion
 
+        #region Index
+
+        builder.HasIndex(record => record.DateTime);
+        builder.HasIndex(record => record.Money);
+
+        #endregion
+
         #region Navigation
 
         builder.HasOne(record => record.Account).WithMany(account => account.OutRecords)
