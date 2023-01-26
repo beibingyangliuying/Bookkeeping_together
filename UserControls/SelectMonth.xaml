@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="UserControls.SelectMonth"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="230" Background="WhiteSmoke"
+             Loaded="UserControl_OnLoaded">
+    <UserControl.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Microsoft Sans Serif" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Microsoft Sans Serif" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="20" />
+
+        </Style>
+        <Style TargetType="xctk:IntegerUpDown">
+            <Setter Property="Margin" Value="3,0,3,0" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Select Month" FontWeight="Bold" />
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Year: " />
+            <xctk:IntegerUpDown x:Name="IntegerUpDownYear" ValueChanged="IntegerUpDown_OnValueChanged" />
+            <TextBlock Text="Month: " />
+            <xctk:IntegerUpDown x:Name="IntegerUpDownMonth" ValueChanged="IntegerUpDown_OnValueChanged" />
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="Start Date: " />
+            <Label x:Name="LabelStart" />
+        </StackPanel>
+        <StackPanel Grid.Row="3">
+            <TextBlock Text="End Date: " />
+            <Label x:Name="LabelEnd" />
+        </StackPanel>
+    </Grid>
+</UserControl>
