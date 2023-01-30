@@ -17,109 +17,205 @@
             </Style>
         </TabControl.Resources>
         <xctk:ColorPickerTabItem Header="File" />
-        <xctk:ColorPickerTabItem Header="View" Height="40" Margin="2,0,2,0" VerticalAlignment="Top">
+        <xctk:ColorPickerTabItem Header="Visualization">
             <xctk:ColorPickerTabItem.Resources>
-                <Style TargetType="RadioButton">
-                    <Setter Property="FontFamily" Value="Microsoft Sans Serif" />
-                    <Setter Property="FontWeight" Value="Bold" />
-                    <Setter Property="FontSize" Value="25" />
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="Margin" Value="5,2,5,2" />
-                </Style>
                 <Style TargetType="StackPanel">
                     <Setter Property="Orientation" Value="Horizontal" />
                     <Setter Property="HorizontalAlignment" Value="Center" />
                 </Style>
+                <Style TargetType="scott:WpfPlot">
+                    <Setter Property="Height" Value="400" />
+                    <EventSetter Event="MouseMove" Handler="WpfPlot_OnMouseMove" />
+                    <EventSetter Event="MouseEnter" Handler="WpfPlot_OnMouseEnter" />
+                    <EventSetter Event="MouseLeave" Handler="WpfPlot_OnMouseLeave" />
+                </Style>
+                <Style TargetType="xctk:DropDownButton">
+                    <Setter Property="Width" Value="300" />
+                </Style>
+                <Style TargetType="DataGrid">
+                    <Setter Property="Height" Value="400" />
+                </Style>
             </xctk:ColorPickerTabItem.Resources>
-                <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0">
-                    <RadioButton x:Name="RadioButtonMonthView" Content="Month" GroupName="ViewSelect" />
-                    <RadioButton x:Name="RadioButtonYearView" Content="Year" GroupName="ViewSelect" />
-                    <RadioButton x:Name="RadioButtonCustomView" Content="Custom" GroupName="ViewSelect" />
-                </StackPanel>
-                <StackPanel Grid.Row="1">
-                    <Button x:Name="ButtonBackward" Content="&lt;" Background="{x:Null}" BorderBrush="{x:Null}" />
-                    <xctk:DropDownButton x:Name="DropDownButtonSelectView" Content="Select Your Date">
-                        <xctk:DropDownButton.DropDownContent>
-                            <usc:SelectMonth />
-                        </xctk:DropDownButton.DropDownContent>
-                    </xctk:DropDownButton> 
-                    <Button x:Name="ButtonForward" Content=">" Background="{x:Null}" BorderBrush="{x:Null}" />
-                </StackPanel>
-                <TabControl Grid.Row="2">
-                    <xctk:ColorPickerTabItem Header="Outcome">
-                        <ScrollViewer>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBlock Text="Count: " />
-                                    <Label x:Name="LabelOutcomeCount" />
-                                    <TextBlock Text="Average: " />
-                                    <Label x:Name="LabelOutcomeAverage" />
-                                </StackPanel>
-                                <scott:WpfPlot x:Name="WpfPlotOutcomeLineChart" Grid.Row="1" Height="400" />
-                                <scott:WpfPlot x:Name="WpfPlotOutcomePieChart" Grid.Row="2" Height="400" />
-                                <ListBox x:Name="ListBoxOutcomeCategory" Grid.Row="3" />
-                            </Grid>
-                        </ScrollViewer>
-                    </xctk:ColorPickerTabItem>
-                    <xctk:ColorPickerTabItem Header="Income">
-                        <ScrollViewer>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBlock Text="Count: " />
-                                    <Label x:Name="LabelIncomeCount" />
-                                    <TextBlock Text="Average: " />
-                                    <Label x:Name="LabelIncomeAverage" />
-                                </StackPanel>
-                                <scott:WpfPlot x:Name="WpfplotIncomeLineChart" Grid.Row="1" Height="400" />
-                                <scott:WpfPlot x:Name="WpfplotIncomePieChart" Grid.Row="2" Height="400" />
-                                <ListBox x:Name="ListBoxIncomeCategory" Grid.Row="3" />
-                            </Grid>
-                        </ScrollViewer>
-                    </xctk:ColorPickerTabItem>
-                    <xctk:ColorPickerTabItem Header="Balance">
-                        <ScrollViewer>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBlock Text="Count: " />
-                                    <Label x:Name="LabelBalanceCount" />
-                                    <TextBlock Text="Average: " />
-                                    <Label x:Name="LabelBalanceAverage" />
-                                </StackPanel>
-                                <scott:WpfPlot x:Name="WpfPlotBalanceLineChart" Grid.Row="1" Height="400" />
-                                <scott:WpfPlot x:Name="WpfPlotBalancePieChart" Grid.Row="2" Height="400" />
-                                <ListBox x:Name="ListBoxBalanceCategory" Grid.Row="3" />
-                            </Grid>
-                        </ScrollViewer>
-                    </xctk:ColorPickerTabItem>
-                </TabControl>
-            </Grid>
+            <TabControl>
+                <xctk:ColorPickerTabItem Header="Month">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <xctk:DropDownButton Grid.Row="0" x:Name="DropDownButtonSelectMonth"
+                                                 Content="Select Your Month" Closed="DropDownButtonSelectMonth_OnClosed">
+                                <xctk:DropDownButton.DropDownContent>
+                                    <usc:SelectMonth x:Name="UscSelectMonth" />
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
+                            <TabControl Grid.Row="1">
+                                <xctk:ColorPickerTabItem Header="Outcome">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0">
+                                            <TextBlock Text="Count: " />
+                                            <Label x:Name="LabelOutcomeCountMonth" />
+                                            <TextBlock Text="Average: " />
+                                            <Label x:Name="LabelOutcomeAverageMonth" />
+                                        </StackPanel>
+                                        <scott:WpfPlot Grid.Row="1" x:Name="WpfPlotLineOutcomeMonth" />
+                                        <Grid Grid.Row="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <scott:WpfPlot Grid.Column="0" x:Name="WpfPlotPieOutcomeMonth" />
+                                            <DataGrid Grid.Column="1" Height="400" />
+                                        </Grid>
+                                    </Grid>
+                                </xctk:ColorPickerTabItem>
+                                <xctk:ColorPickerTabItem Header="Income">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0">
+                                            <TextBlock Text="Count: " />
+                                            <Label x:Name="LabelIncomeCountMonth" />
+                                            <TextBlock Text="Average: " />
+                                            <Label x:Name="LabelIncomeCountAverage" />
+                                        </StackPanel>
+                                        <scott:WpfPlot Grid.Row="1" x:Name="WpfPlotLineIncomeMonth" />
+                                        <Grid Grid.Row="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <scott:WpfPlot Grid.Column="0" x:Name="WpfPlotPieIncomeMonth" />
+                                            <DataGrid Grid.Column="1" Height="400" />
+                                        </Grid>
+                                    </Grid>
+                                </xctk:ColorPickerTabItem>
+                                <xctk:ColorPickerTabItem Header="Balance">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0">
+                                            <TextBlock Text="Count: " />
+                                            <Label x:Name="LabelBalanceCountMonth" />
+                                            <TextBlock Text="Average: " />
+                                            <Label x:Name="LabelBalanceAverageMonth" />
+                                        </StackPanel>
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <scott:WpfPlot Grid.Column="0" x:Name="WpfPlotLineBalanceMonth" />
+                                            <DataGrid Grid.Column="1" />
+                                        </Grid>
+                                    </Grid>
 
+                                </xctk:ColorPickerTabItem>
+                            </TabControl>
+                        </Grid>
+                    </ScrollViewer>
+                </xctk:ColorPickerTabItem>
+                <xctk:ColorPickerTabItem Header="Year">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <xctk:DropDownButton Grid.Row="0" x:Name="DropDownButtonSelectYear"
+                                                 Content="Select Your Date">
+                                <xctk:DropDownButton.DropDownContent>
+                                    <usc:SelectYear x:Name="UscSelectYear" />
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
+                            <TabControl Grid.Row="1">
+                                <xctk:ColorPickerTabItem Header="Outcome">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0">
+                                            <TextBlock Text="Count: " />
+                                            <Label x:Name="LabelOutcomeCountYear" />
+                                            <TextBlock Text="Average: " />
+                                            <Label x:Name="LabelOutcomeAverageYear" />
+                                        </StackPanel>
+                                        <scott:WpfPlot Grid.Row="1" x:Name="WpfPlotLineOutcomeYear" />
+                                        <Grid Grid.Row="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <scott:WpfPlot Grid.Column="0" x:Name="WpfPlotPieOutcomeYear" />
+                                            <DataGrid Grid.Column="1" />
+                                        </Grid>
+                                    </Grid>
+                                </xctk:ColorPickerTabItem>
+                                <xctk:ColorPickerTabItem Header="Income">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0">
+                                            <TextBlock Text="Count: " />
+                                            <Label x:Name="LabelIncomeCountYear" />
+                                            <TextBlock Text="Average: " />
+                                            <Label x:Name="LabelIncomeAverageYear" />
+                                        </StackPanel>
+                                        <scott:WpfPlot Grid.Row="1" x:Name="WpfPlotLineIncomeYear" />
+                                        <Grid Grid.Row="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <scott:WpfPlot Grid.Column="0" x:Name="WpfPlotPieIncomeYear" />
+                                            <DataGrid Grid.Column="1" />
+                                        </Grid>
+                                    </Grid>
+                                </xctk:ColorPickerTabItem>
+                                <xctk:ColorPickerTabItem Header="Balance">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0">
+                                            <TextBlock Text="Count: " />
+                                            <Label x:Name="LabelBalanceCountYear" />
+                                            <TextBlock Text="Average: " />
+                                            <Label x:Name="LabelBalanceAverageYear" />
+                                        </StackPanel>
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <scott:WpfPlot Grid.Column="0" x:Name="WpfPlotLineBalanceYear" />
+                                            <DataGrid Grid.Column="1" />
+                                        </Grid>
+                                    </Grid>
+                                </xctk:ColorPickerTabItem>
+                            </TabControl>
+                        </Grid>
+                    </ScrollViewer>
+                </xctk:ColorPickerTabItem>
+            </TabControl>
         </xctk:ColorPickerTabItem>
         <xctk:ColorPickerTabItem Header="Data" />
-
     </TabControl>
 </Window>

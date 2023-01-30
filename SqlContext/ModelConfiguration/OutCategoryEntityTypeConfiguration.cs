@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SqlContext.ModelClass;
+using SqlContext.Model;
 
-namespace SqlContext.ModelConfigureClass;
+namespace SqlContext.ModelConfiguration;
 
-internal class OutCategoryEntityTypeConfiguration : IEntityTypeConfiguration<OutCategory>
+internal sealed class OutCategoryEntityTypeConfiguration : IEntityTypeConfiguration<OutCategory>
 {
     public void Configure(EntityTypeBuilder<OutCategory> builder)
     {

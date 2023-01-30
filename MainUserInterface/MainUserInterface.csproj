@@ -21,7 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Common\Common.csproj"/>
         <ProjectReference Include="..\SqlContext\SqlContext.csproj"/>
         <ProjectReference Include="..\UserControls\UserControls.csproj"/>
     </ItemGroup>

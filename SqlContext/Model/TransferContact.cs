@@ -1,6 +1,6 @@
-namespace SqlContext.ModelClass;
+namespace SqlContext.Model;
 
-public class TransferContact
+public sealed class TransferContact
 {
     public int RowId { get; set; }
     public int InRecordId { get; set; }

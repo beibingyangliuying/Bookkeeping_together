@@ -1,13 +1,13 @@
 using SqlContext.Interface;
 
-namespace SqlContext.ModelClass;
+namespace SqlContext.Model;
 
-public class OutCategory : INamedSeries
+public sealed class InCategory : INamedSeries
 {
     public byte RowId { get; set; }
 #nullable disable
     public string Name { get; set; }
-    public List<OutRecord> OutRecords { get; set; }
 #nullable enable
+    public List<InRecord>? InRecords { get; set; }
     public override string ToString() => Name;
 }

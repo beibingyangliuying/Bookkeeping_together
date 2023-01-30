@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SqlContext.ModelClass;
+using SqlContext.Model;
 
-namespace SqlContext.ModelConfigureClass;
+namespace SqlContext.ModelConfiguration;
 
-internal class InRecordEntityTypeConfiguration : IEntityTypeConfiguration<InRecord>
+internal sealed class InRecordEntityTypeConfiguration : IEntityTypeConfiguration<InRecord>
 {
     public void Configure(EntityTypeBuilder<InRecord> builder)
     {

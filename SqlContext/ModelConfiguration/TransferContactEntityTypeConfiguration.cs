@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SqlContext.ModelClass;
+using SqlContext.Model;
 
-namespace SqlContext.ModelConfigureClass;
+namespace SqlContext.ModelConfiguration;
 
-public class TransferContactEntityTypeConfiguration : IEntityTypeConfiguration<TransferContact>
+public sealed class TransferContactEntityTypeConfiguration : IEntityTypeConfiguration<TransferContact>
 {
     public void Configure(EntityTypeBuilder<TransferContact> builder)
     {

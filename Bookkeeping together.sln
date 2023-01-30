@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainUserInterface", "MainUs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlContext", "SqlContext\SqlContext.csproj", "{51432E42-606E-4029-8A1E-07F7EEFF7B8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{6E8C61D0-C7C1-4434-9E74-045AAF9741B2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControls", "UserControls\UserControls.csproj", "{160F3E50-FC33-40E5-ACBE-62DF1DDB2B9F}"
 EndProject
 Global
@@ -22,10 +20,6 @@ Global
 		{51432E42-606E-4029-8A1E-07F7EEFF7B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51432E42-606E-4029-8A1E-07F7EEFF7B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51432E42-606E-4029-8A1E-07F7EEFF7B8C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E8C61D0-C7C1-4434-9E74-045AAF9741B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E8C61D0-C7C1-4434-9E74-045AAF9741B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E8C61D0-C7C1-4434-9E74-045AAF9741B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E8C61D0-C7C1-4434-9E74-045AAF9741B2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{160F3E50-FC33-40E5-ACBE-62DF1DDB2B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{160F3E50-FC33-40E5-ACBE-62DF1DDB2B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{160F3E50-FC33-40E5-ACBE-62DF1DDB2B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
